@@ -1,0 +1,52 @@
+env:
+    #gcp_credentials: "ENCRYPTED[52d9731bab8dea7e2f71cbd5162d10dc57e1c8a9e91779b86758948763c13b48d21681a2f0f20a8e6c5133dfbb445c47]"
+    rclone_config: "ENCRYPTED[3c83ff4e129f1ced7d697b973f99d3cf33fd7936b9ad27602c7ffa47c5d678da1c8cc1fcf2ab067b09fe35e501b6ad75]"
+    TG_TOKEN: "ENCRYPTED[7888fd688129c58fcd9a25086dad02a0c103986cfca92f0d1606b3873ab2e02fffacffe4a8a432b0d726eff81999323e]"
+    TG_CHAT_ID: "ENCRYPTED[e06537f430d3e1dfd6bd23c324f9f5d0ac0a67807e496b194aa1a1bfb4c4a8aae6b6eb77bdcb5ae2f043b9b09cc00bc5]"
+    SF_USERNAME: "ENCRYPTED[9b9deac88b090b7dc4e69a058e79360e8832c782b9bd46499a7f1401e66e219bad7c9c901a85eeb0d154f717cfc5f148]"
+    SF_PASS: "ENCRYPTED[9d4e6509f1294d4d9b39c9f092f32123bef7cdf2c773cda6f80867a329c629d6ab9f1cee0db0c38184bd13d8e8a5556f]"
+    ROM_PROJECT: "cherish-12.1"
+    DOCKER_HUB_PWD: "ENCRYPTED[45147df4523a226976c523c65f2a84d3361dff9316c97a1cef1aee1ac524b430d5a4b48e18f28603109a27f52bc7a721]"
+    TOKEN: "ENCRYPTED[d54cdbd8648be21a5afda47479c134fc824f12d8c3318f0a471f0720488015135663762ad3604cfa49704744ef58a04e]"
+ 
+task:
+  name: Syncing, Building and Uploading
+  timeout_in: 4h
+  container:
+    image: arifjenong/rom:cherish
+    cpu: 8
+    memory: 32G
+
+  Env_background_script:
+      - ./env.sh
+
+  Download_background_script:
+      #- time rclone copy znxtproject:ccache/$ROM_PROJECT/ccache.tar.gz /cirrus -P
+      - time rclone copy znxtproject:ccache/$ROM_PROJECT/ccache.tar.zst /cirrus -P
+      - ./setup.sh
+
+  Retry_background_script:
+      - ./retry.sh
+
+  Sync_script:
+      - ./repo.sh
+
+  Build_script:
+      - ./build.sh
+
+  UploadROM_background_script:
+      - cd /cirrus/rom/out/target/product/maple_dsds
+      - ls -lh
+      - time rclone copy $(ls *maple*UNOFFICIAL*.zip) znxtproject:rom/$ROM_PROJECT/maple_dsds -P && time rclone copy $(ls *.md5sum) znxtproject:rom/$ROM_PROJECT/maple_dsds -P && ls -lh
+      # cd system/system_ext/priv-app
+      # ls -lh
+      # time rclone copy CustomizationSelector znxtproject:rom/$ROM_PROJECT/maple_dsds -P
+      # time rclone copy XperiaParts znxtproject:rom/$ROM_PROJECT/maple_dsds -P
+      #- curl -s https://api.telegram.org/$TG_TOKEN/sendMessage -d chat_id=$TG_CHAT_ID -d text="Build $(cd /cirrus/rom/out/target/product/maple_dsds && ls *UNOFFICIAL*.zip) Uploaded Successfully!"
+
+  UploadCc_script:
+      - ./build_zip.sh
+      #- sleep 2m
+
+  SF_script:
+      #- ./sf.sh
