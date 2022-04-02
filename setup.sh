@@ -11,4 +11,3 @@
   free -h
   nproc
   cat /etc/os*
-  env

@@ -22,7 +22,7 @@ make systemimage &
 #sleep 50m #first running
 sleep 105m #second running
 #sleep 106m #third running
-#kill %1
+kill %1
  
 #mka bacon -j24
 ccache -s

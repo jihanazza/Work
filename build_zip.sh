@@ -55,5 +55,5 @@ get_selinux () {
   root
 }
 
-get_selinux
+#get_selinux
 get_ccache
