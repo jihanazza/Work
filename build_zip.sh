@@ -34,6 +34,13 @@ system-ext () {
   time rclone copy selinux.tar.* znxtproject:rom/CherishOS/$ROM_PROJECT/system/system-ext/etc -P
 }
 
+vendor () {
+  cd /cirrus/rom/out/target/product/maple_dsds/system/vendor/etc
+  ls -lh
+  time com selinux 1
+  time rclone copy selinux.tar.* znxtproject:rom/CherishOS/$ROM_PROJECT/system/system-ext/etc -P
+}
+
 root () {
   cd /cirrus/rom/out/target/product/maple_dsds/root
   ls -lh
