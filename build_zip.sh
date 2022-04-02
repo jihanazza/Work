@@ -38,7 +38,7 @@ vendor () {
   cd /cirrus/rom/out/target/product/maple_dsds/system/vendor/etc
   ls -lh
   time com selinux 1
-  time rclone copy selinux.tar.* znxtproject:rom/CherishOS/$ROM_PROJECT/system/system-ext/etc -P
+  time rclone copy selinux.tar.* znxtproject:rom/CherishOS/$ROM_PROJECT/system/vendor/etc -P
 }
 
 root () {
@@ -51,6 +51,7 @@ get_selinux () {
   system
   product
   system-ext
+  vendor
   root
 }
 
