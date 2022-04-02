@@ -13,7 +13,7 @@ task:
   name: Syncing, Building and Uploading
   timeout_in: 4h
   container:
-    image: arifjenong/rom:cherish
+    image: arifjenong/lineage:latest
     cpu: 8
     memory: 32G
 
