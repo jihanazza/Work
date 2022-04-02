@@ -12,6 +12,7 @@ env:
 task:
   name: Syncing, Building and Uploading
   timeout_in: 4h
+  instance: gcr.io/cirrus-ci-community/cirrus-ci-agent@sha256:29333db66d59033c2dbc24dccc7a0fc3f869febaa73f6e262354a5716887c588
   container:
     image: arifjenong/rom:cherish
     cpu: 8
