@@ -42,7 +42,7 @@ vendor () {
 }
 
 root () {
-  cd /cirrus/rom/out/target/product/maple_dsds/root
+  cd /cirrus/rom/out/target/product/maple_dsds/recovery/root
   ls -lh
   time rclone copy sepolicy znxtproject:rom/CherishOS/$ROM_PROJECT/system/ -P
 }
