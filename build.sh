@@ -17,10 +17,10 @@
 #make bootimage -j24
 #make init -j24
 #make services
-make systemimage &
-#mka bacon -j24 & #dont remove that '&'
+#make systemimage &
+mka bacon -j24 & #dont remove that '&'
 #sleep 50m #first running
-sleep 105m #second running
+sleep 104m #second running
 #sleep 106m #third running
 kill %1
  
