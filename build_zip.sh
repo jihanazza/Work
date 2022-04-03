@@ -57,3 +57,9 @@ get_selinux () {
 
 #get_selinux
 get_ccache
+
+# Lets see machine specifications and environments
+  df -h
+  free -h
+  nproc
+  cat /etc/os*

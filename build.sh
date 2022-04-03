@@ -18,11 +18,11 @@
 #make init -j24
 #make services
 #make systemimage &
-mka bacon -j24 & #dont remove that '&'
+#mka bacon -j24 & #dont remove that '&'
 #sleep 50m #first running
-sleep 104m #second running
+#sleep 104m #second running
 #sleep 106m #third running
-kill %1
+#kill %1
  
-#mka bacon -j24
+mka bacon -j24
 ccache -s
