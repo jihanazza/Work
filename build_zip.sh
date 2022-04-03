@@ -48,10 +48,10 @@ root () {
 }
 
 get_selinux () {
-  system
-  product
-  system-ext
-  vendor
+  #system
+  #product
+  #system-ext
+  #vendor
   root
 }
 
