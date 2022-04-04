@@ -23,5 +23,5 @@ make systemimage &
 sleep 105m #third running
 kill %1
  
- #mka bacon
- ccache -s
+#mka bacon
+ccache -s
