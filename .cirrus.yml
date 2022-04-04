@@ -50,4 +50,3 @@ task:
 
   SF_script:
       #- ./sf.sh
-      - cd /cirrus && time rm -rf rom

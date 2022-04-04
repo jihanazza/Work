@@ -23,5 +23,5 @@
 #sleep 105m #third running
 #kill %1
  
- mka bacon -j24
+ mka bacon
  ccache -s

@@ -28,7 +28,6 @@ patch () {
 
 ls -lh
 compile
-cherry_pick
 patch
 
 # Lets see machine specifications and environments
