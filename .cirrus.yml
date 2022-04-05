@@ -21,7 +21,7 @@ task:
       - ./env.sh
 
   Download_background_script:
-      #- time rclone copy znxtproject:ccache/$ROM_PROJECT/ccache.tar.gz /cirrus -P
+      - sleep 6m
       - time rclone copy znxtproject:ccache/$ROM_PROJECT/ccache.tar.zst /cirrus -P
       - ./setup.sh
 
