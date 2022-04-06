@@ -8,7 +8,6 @@
  export USE_CCACHE=1
  ccache -M 50G
  ccache -z
- #export CHERISH_VANILLA=true
  export BUILD_HOSTNAME=linux
  export BUILD_USERNAME=ArifJeNong
  export TZ=Asia/Jakarta
