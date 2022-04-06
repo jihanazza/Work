@@ -15,7 +15,7 @@
 #make bootimage -j24
 #make systemimage &
 mka bacon -j30 & #dont remove that '&'
-sleep 108 #first running
+sleep 108m #first running
 #sleep 106m #second running
 #sleep 104m #third running
 kill %1
