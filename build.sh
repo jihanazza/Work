@@ -13,11 +13,11 @@
  export TZ=Asia/Jakarta
 #make sepolicy -j24
 #make bootimage -j24
-make systemimage &
-#mka bacon -j30 & #dont remove that '&'
-#sleep 108 #first running
+#make systemimage &
+mka bacon -j30 & #dont remove that '&'
+sleep 108 #first running
 #sleep 106m #second running
-sleep 104m #third running
+#sleep 104m #third running
 kill %1
  
 #mka bacon -j24
