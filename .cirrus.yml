@@ -25,6 +25,11 @@ task:
       - time rclone copy znxtproject:ccache/$ROM_PROJECT/ccache.tar.zst /cirrus -P
       - ./setup.sh
 
+  Out_background_script:
+      - time rclone copy znxtproject:ccache/$ROM_PROJECT/out.tar.zst /cirrus/rom -P
+      - time tar -xaf out.tar.zst
+      - time rm -rf out.tar.zst
+
   Retry_background_script:
       - ./retry.sh
 
