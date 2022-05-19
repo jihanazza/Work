@@ -13,10 +13,24 @@ compile () {
     echo "done."
 }
 
-cherry_pick () {
-  cd frameworks/base
-  git remote add fork https://github.com/ariffjenong/android_frameworks_base-1.git
-  git fetch fork twelve-one && git cherry-pick 8880cb54eed9277a9e3581aa3ad55ba718f7e012 && git cherry-pick 6c0124275d947c784b2f021d8d64b9918a31b369
+push_kernel () {
+  cd /cirrus/rom/kernel/sony/ms*
+  git push github HEAD:refs/heads/cherish-12
+}
+
+push_device () {
+  cd /cirrus/rom/device/sony/maple_dsds
+  git push github HEAD:cherish-12 -f
+}
+
+push_yoshino () {
+  cd /cirrus/rom/device/sony/yos*
+  git push github HEAD:cherish-12 -f
+}
+
+push_vendor () {
+  cd /cirrus/rom/vendor/sony/maple_dsds
+  git push github HEAD:cherish-12 -f
 }
 
 patch () {
@@ -27,7 +41,11 @@ patch () {
 }
 
 ls -lh
-compile
+#compile
+push_kernel
+push_device
+push_yoshino
+push_vendor
 #patch
 
 # Lets see machine specifications and environments
