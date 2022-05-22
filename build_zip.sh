@@ -6,7 +6,7 @@ com () {
 }
 
 get_ccache () {
-  cd /cirrus
+  cd ~
   time com ccache 1
   time rclone copy ccache.tar.* znxtproject:ccache/$ROM_PROJECT -P
   time rm ccache.tar.*
@@ -14,35 +14,35 @@ get_ccache () {
 }
 
 system () {
-  cd /cirrus/rom/out/target/product/maple_dsds/system/etc
+  cd ~/rom/out/target/product/maple_dsds/system/etc
   ls -lh
   time com selinux 1
   time rclone copy selinux.tar.* znxtproject:rom/CherishOS/$ROM_PROJECT/system/etc -P
 }
 
 product () {
-  cd /cirrus/rom/out/target/product/maple_dsds/system/product/etc
+  cd ~/rom/out/target/product/maple_dsds/system/product/etc
   ls -lh
   time com selinux 1
   time rclone copy selinux.tar.* znxtproject:rom/CherishOS/$ROM_PROJECT/system/product/etc -P
 }
 
 system-ext () {
-  cd /cirrus/rom/out/target/product/maple_dsds/system/system-ext/etc
+  cd ~/rom/out/target/product/maple_dsds/system/system-ext/etc
   ls -lh
   time com selinux 1
   time rclone copy selinux.tar.* znxtproject:rom/CherishOS/$ROM_PROJECT/system/system-ext/etc -P
 }
 
 vendor () {
-  cd /cirrus/rom/out/target/product/maple_dsds/system/vendor/etc
+  cd ~/rom/out/target/product/maple_dsds/system/vendor/etc
   ls -lh
   time com selinux 1
   time rclone copy selinux.tar.* znxtproject:rom/CherishOS/$ROM_PROJECT/system/vendor/etc -P
 }
 
 root () {
-  cd /cirrus/rom/out/target/product/maple_dsds/recovery/root
+  cd ~/rom/out/target/product/maple_dsds/recovery/root
   ls -lh
   time rclone copy sepolicy znxtproject:rom/CherishOS/$ROM_PROJECT/system/ -P
 }
@@ -56,7 +56,7 @@ get_selinux () {
 }
 
 get_out () {
-  cd /cirrus/rom
+  cd ~/rom
   time com out 9
   time rclone copy out.tar.* znxtproject:ccache/$ROM_PROJECT -P
   time rm out.tar.*
@@ -64,8 +64,8 @@ get_out () {
 }
 
 #get_selinux
-#get_ccache
-get_out
+get_ccache
+#get_out
 
 # Lets see machine specifications and environments
   df -h

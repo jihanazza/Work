@@ -1,9 +1,9 @@
 #!/bin/bash
 
-cd /cirrus/rom/out/target/product/maple_dsds
+cd ~/rom/out/target/product/maple_dsds
 
 
-product=$(ls *maple_dsds*UNOFFICIAL*.zip)
+product=$(ls *maple_dsds*OFFICIAL*.zip)
 md5sum=$(ls *.md5sum)
 project=xperia-xz-premium/maple_dsds
 

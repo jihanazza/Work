@@ -1,5 +1,5 @@
 #!/bin/bash
-  cd /cirrus
+  cd ~
   ls -lh
   #time tar xf ccache.tar.gz
   #time rm ccache.tar.gz
