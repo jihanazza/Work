@@ -1,8 +1,9 @@
 #!/bin/bash
     
 sync () {
-     cd ~/rom
+    cd ~/rom
     repo init --depth=1 --no-repo-verify -u $Nusantara -g default,-mips,-darwin,-notdefault
+    git clone https://github.com/ariffjenong/local_manifest.git --depth 1 -b nad-12.1 .repo/local_manifests
     rclone copy znxtproject:NusantaraProject/manifest/nusantara.xml .repo/manifests/snippets -P
     rclone copy znxtproject:NusantaraProject/manifest/local_nad.xml .repo/local_manifests -P
     cd .repo/manifests && git add . && git commit -m 'tes' && cd ..
@@ -61,7 +62,7 @@ push_vendor () {
 cd ~/rom
 ls -lh
 compile &
-sleep 154m
+sleep 114m
 kill %1
 #push_kernel
 #push_device
