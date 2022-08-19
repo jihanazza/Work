@@ -57,6 +57,8 @@ jobs:
 
             variant=${{ inputs.variant }}
             if [[ $variant == "vanilla" ]]; then echo "Building vanilla variant"; elif [[ $variant == "gapps" ]]; then echo "Building gapps variant"; export ARROW_GAPPS=true; else echo "Unknown variant, falling back to vanilla"; fi
+            
+            export ARROW_BETA=true
 
             source build/envsetup.sh
             lunch arrow_${{ inputs.device }}-userdebug
