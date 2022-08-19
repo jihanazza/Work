@@ -41,18 +41,18 @@ jobs:
             echo "::set-output name=date::$(date +'%Y-%m-%d--%H-%M-%S')"
         - name: Clean the build directory
           run: |
-            cd ~/android/arrow-12.1/
+            cd ~/android/arrow-13.0/
             if [[ "${{ inputs.clean }}" == "partial" ]]; then echo "Performing a partial clean"; rm -rf out/target/product/${{ inputs.device }}; elif [[ "${{ inputs.clean }}" == "full" ]]; then echo "Performing a full clean"; rm -rf out; else echo "Skipping clean"; fi
 
             rm -f out/target/product/${{ inputs.device }}/Arrow*.zip*
             rm -f ${GITHUB_WORKSPACE}/Arrow*.zip*
         - name: Fetch the latest changes
           run: |
-            cd ~/android/arrow-12.1/
+            cd ~/android/arrow-13.0/
             repo sync --force-sync
         - name: Run the build
           run: |
-            cd ~/android/arrow-12.1/
+            cd ~/android/arrow-13.0/
             echo "Building for ${{ inputs.device }}"
 
             variant=${{ inputs.variant }}
