@@ -27,6 +27,16 @@ on:
                 - none
                 - partial
                 - full
+            repopick-changes:
+                description: 'The list of changes to pick'
+                default: ''
+                required: true
+                type: string
+            repopick-topics:
+                description: 'The list of topics to pick'
+                default: ''
+                required: true
+                type: string
 jobs:
     Arrow-Build:
       runs-on: self-hosted
@@ -50,6 +60,12 @@ jobs:
           run: |
             cd ~/android/arrow-13.0/
             repo sync --force-sync
+        - name: Repopick the changes
+          run: |
+            for change in ${{ inputs.repopick-changes }}; do repopick $change; done
+        - name: Repopick the topics
+          run: |
+            for topic in ${{ inputs.repopick-topics }}; do repopick -t $topic; done
         - name: Run the build
           run: |
             cd ~/android/arrow-13.0/
