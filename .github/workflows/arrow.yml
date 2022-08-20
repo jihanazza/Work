@@ -62,10 +62,12 @@ jobs:
             repo sync --force-sync
         - name: Repopick the changes
           run: |
+            cd ~/android/arrow-13.0/
             source build/envsetup.sh
             for change in ${{ inputs.repopick-changes }}; do repopick $change; done
         - name: Repopick the topics
           run: |
+            cd ~/android/arrow-13.0/
             source build/envsetup.sh
             for topic in ${{ inputs.repopick-topics }}; do repopick -t $topic; done
         - name: Run the build
