@@ -29,7 +29,7 @@ on:
 jobs:
     Arrow-Build:
       runs-on: self-hosted
-      permissions: write-all
+      permissions: read-all|write-all
       if: ${{ inputs.device }}
       steps:
         - name: Verify the environment
