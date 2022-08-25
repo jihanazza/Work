@@ -6,7 +6,7 @@ sync () {
     git clone https://github.com/ariffjenong/local_manifest.git --depth 1 -b nad-12.1 .repo/local_manifests
     rclone copy znxtproject:NusantaraProject/manifest/nusantara.xml .repo/manifests/snippets -P
     rclone copy znxtproject:NusantaraProject/manifest/local_nad.xml .repo/local_manifests -P
-    cd .repo/manifests && git add . && git commit -m 'tes' && cd cd ~/rom
+    cd .repo/manifests && git add . && git commit -m 'tes' && cd ~/rom
     repo sync -c --no-clone-bundle --no-tags --optimized-fetch --prune --force-sync -j8
     repo sync kernel/sony/msm8998 device/sony/yoshino-common device/sony/maple_dsds vendor/sony/maple_dsds -c --no-clone-bundle --no-tags --optimized-fetch --prune --force-sync -j8
 }
