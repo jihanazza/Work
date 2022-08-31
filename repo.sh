@@ -3,7 +3,7 @@
 sync () {
     cd ~/rom
     repo init --depth=1 --no-repo-verify -u https://github.com/LineageOS/android.git -b $ROM_PROJECT -g default,-mips,-darwin,-notdefault
-    git clone https://github.com/whatawurst/android_device_sony_maple_dsds.git -b $ROM_PROJECT
+    git clone https://github.com/whatawurst/android_device_sony_maple_dsds.git -b lineage-20
 }
 
 build () {
