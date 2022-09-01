@@ -27,9 +27,12 @@ task:
   Build_script:
       - cd ~/rom
       - git clone https://github.com/NusantaraROM-Devices/android_kernel_sony_msm8998 -b 12.1 kernel && cd kernel
-      - git remote add whatawurst https://github.com/whatawurst/android_kernel_sony_msm8998
-      - git branch -m 12.1 del && git checkout f43f4d75763aebeb3a147e51e72993db4c5ba1cf && git switch -c 12.1
-      - git cherry-pick 75611aafa9abe3ce324b897c3ee1d6b641fdf322^..d568cb4a433706e1f1312fa1afe91688ac23ef3d
-      - git push origin HEAD:12.1 -f && git branch -D del
+      - git remote add whatawurst https://github.com/derfelot/android_kernel_sony_msm8998
+      - git checkout 93eef30cf2c49dbfdd9586eb55267ff718bae665 && git switch -c 13.0
+      - git fetch whatawurst lineage-20
+      - git merge FETCH_HEAD
+      - git fetch origin 13
+      - git cherry-pick e7aaf482dc5700f6d9b90b9bf79f0efc44c87d55 bd2f5d1a5ee3ae6563864a99177c4d9b1203197a
+      #- git push origin HEAD:13 -f
       - cd ~/rom
       - rm -rf kernel
