@@ -28,11 +28,13 @@ task:
       - cd ~/rom
       - git clone https://github.com/NusantaraROM-Devices/android_kernel_sony_msm8998 -b 12.1 kernel && cd kernel
       - git remote add whatawurst https://github.com/derfelot/android_kernel_sony_msm8998
-      - git checkout 93eef30cf2c49dbfdd9586eb55267ff718bae665 && git switch -c 13.0
       - git fetch whatawurst lineage-20
-      - git merge FETCH_HEAD
+      - git checkout FETCH_HEAD && git switch -c 13.0
       - git fetch origin 13
-      - git cherry-pick e7aaf482dc5700f6d9b90b9bf79f0efc44c87d55 bd2f5d1a5ee3ae6563864a99177c4d9b1203197a
-      - git push origin HEAD:13 -f
+      - git cherry-pick 4554ad4c246df62ff341c5c21774ea44790289a9^..f43f4d75763aebeb3a147e51e72993db4c5ba1cf
+      - git cherry-pick b78c6f5b754d46ed1043aae0ea7e1e2604256d1f 93eef30cf2c49dbfdd9586eb55267ff718bae665 918c6d531d46d48fdc2b2c2002d4f6303b4d0314 5fa813eae5a23a36e6141398a67f61217652fc7f
+      - git fetch https://git.kernel.org/pub/scm/linux/kernel/git/cip/linux-cip v4.4-st20
+      - git merge FETCH_HEAD
+      #- git push origin HEAD:13 -f
       - cd ~/rom
       - rm -rf kernel
