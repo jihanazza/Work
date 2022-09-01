@@ -33,6 +33,6 @@ task:
       - git merge FETCH_HEAD
       - git fetch origin 13
       - git cherry-pick e7aaf482dc5700f6d9b90b9bf79f0efc44c87d55 bd2f5d1a5ee3ae6563864a99177c4d9b1203197a
-      #- git push origin HEAD:13 -f
+      - git push origin HEAD:13 -f
       - cd ~/rom
       - rm -rf kernel
