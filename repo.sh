@@ -7,10 +7,6 @@ sync () {
     rclone copy znxtproject:NusantaraProject/manifest/13/local_nad.xml .repo/local_manifests -P
     repo sync -c --no-clone-bundle --no-tags --optimized-fetch --prune --force-sync -j8
     repo sync kernel/sony/msm8998 device/sony/yoshino-common device/sony/maple_dsds vendor/sony/maple_dsds -c --no-clone-bundle --no-tags --optimized-fetch --prune --force-sync -j8
-    rm kernel/sony/msm8998/arch/arm64/configs/lineage-msm8998-yoshino-maple_dsds_defconfig
-    rm kernel/sony/msm8998/drivers/staging/qcacld-3.0/Kbuild
-    rclone copy znxtproject:NusantaraProject/manifest/13/lineage-msm8998-yoshino-maple_dsds_defconfig kernel/sony/msm8998/arch/arm64/configs -P
-    rclone copy znxtproject:NusantaraProject/manifest/13/Kbuild kernel/sony/msm8998/drivers/staging/qcacld-3.0 -P
     cd hardware/nad/interfaces
     git fetch https://github.com/LineageOS/android_hardware_lineage_interfaces lineage-19.1 && git cherry-pick 21e6c8c09692bb9ae21fdc6e4bc1442f6c4cd5d0
     cd ../../qcom-caf/common && git fetch https://github.com/ArrowOS/android_hardware_qcom-caf_common arrow-13.0 && git merge FETCH_HEAD
