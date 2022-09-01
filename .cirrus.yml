@@ -26,12 +26,10 @@ task:
 
   Build_script:
       - cd ~/rom
-      - git clone https://github.com/NusantaraROM-Devices/android_kernel_sony_msm8998 -b 13 kernel && cd kernel
-      - git remote add arif https://github.com/ariffjenong/android_kernel_sony_msm8998
-      - git fetch arif test13
-      - git checkout FETCH_HEAD && git switch -c tes && git branch -D 13
-      - git checkout de63a22f0cb4f53942e47f6be4a0996d52d4f724 && git switch -c 13 && git branch -D tes
-      - git cherry-pick b7dce82147b52134c2ae5f8b5edc69fd5a479351 ed72bcbf6988858daceeec85c0927430ff192fee
-      - git push origin HEAD:13 -f
+      - git clone https://github.com/NusantaraROM-Devices/android_kernel_sony_msm8998 -b 12.1 kernel && cd kernel
+      - git remote add whatawurst https://github.com/whatawurst/android_kernel_sony_msm8998
+      - git branch -m 12.1 del && git checkout f43f4d75763aebeb3a147e51e72993db4c5ba1cf && git switch -c 12.1
+      - git cherry-pick 75611aafa9abe3ce324b897c3ee1d6b641fdf322^..d568cb4a433706e1f1312fa1afe91688ac23ef3d
+      - git push origin HEAD:12.1 -f && git branch -D del
       - cd ~/rom
       - rm -rf kernel
