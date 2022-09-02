@@ -33,7 +33,7 @@ retry_event() {
 }
 
 cd ~/rom
-sleep 119m
+sleep 118m
 #sleep 7191
 compiled_zip
 retry_event
