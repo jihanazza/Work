@@ -24,7 +24,8 @@ build () {
      export BUILD_USERNAME=znxt
      export TZ=Asia/Jakarta
      export SELINUX_IGNORE_NEVERALLOWS=true
-     #export USE_GAPPS=true
+     export ALLOW_MISSING_DEPENDENCIES=true
+     export USE_GAPPS=true
      export NAD_BUILD_TYPE=OFFICIAL
      export USE_PIXEL_CHARGING=true
      lunch nad_maple_dsds-userdebug
