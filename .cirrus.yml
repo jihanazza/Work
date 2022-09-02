@@ -1,0 +1,54 @@
+env:
+    CIRRUS_CLONE_DEPTH: 1
+    #gcp_credentials: "ENCRYPTED[52d9731bab8dea7e2f71cbd5162d10dc57e1c8a9e91779b86758948763c13b48d21681a2f0f20a8e6c5133dfbb445c47]"
+    manifest: "ENCRYPTED[!5260a6da75ee409a9472d73c48deca74092a7134b318553c13e5313696fb048b0bb618de741f893ac6fdfb1e60bd3717!]"
+    rclone_config: "ENCRYPTED[!4480cec89bfc88faf7a46d8dba46a2666222b5ac9b4bcec03be3c548bf5c3cf1622cb2287e31811d16b91a68f04bfdd0!]"
+    TG_TOKEN: "ENCRYPTED[!ae64f4fd826ab2764fcb72fb8656f12aa280fae3ca426bba90c70d53b08b7e08cc3a1f94af7f8144e2973d527456cd1b!]"
+    TG_CHAT_ID: "ENCRYPTED[!029352af8b1128d0d5cd801d06d2b1a11d0607221a92831ec33f68d87adeaa4165b6febf0226a205dc7cf5dd7e788d1d!]"
+    SF_USERNAME: "ENCRYPTED[!95a940ec87c1a439f2c0df30cfc715794eaed2cccd1af8dbd74e7cfb80f7d450f306455ff85b319d8cf53fcf17ca3990!]"
+    SF_PASS: "ENCRYPTED[!fe4b9fc832922fce680535a3947bed49c4dd4464ce94c87b5279ee4d6e678abc298e15a29b477af3f3a124743161918e!]"
+    ROM_PROJECT: "cherish-12.1"
+    GIT: "ENCRYPTED[!b4019552b6060e5a40830b60ededa1aa92cee4f4a20bdddc35f0d670436416a11ee82b326ee1dba8821153d8cf6de94f!]"
+    #DOCKER_HUB_PWD: "ENCRYPTED[45147df4523a226976c523c65f2a84d3361dff9316c97a1cef1aee1ac524b430d5a4b48e18f28603109a27f52bc7a721]"
+    TOKEN: "ENCRYPTED[!bdf0a078eb9ad4e3bb1a47fb03711f1bd439ffe93f143659a6a5cdcf51e26470333744efc12de687397c4ba2e174c043!]"
+    Nusantara: "ENCRYPTED[!fa2a6d46a1aa980bf01dee9e6d7f0377b52db1d39bb6878f9360f8dc151b381af20eea7a0c4bbec93750a6797d1a06e6!]"
+ 
+task:
+  name: Syncing, Building and Uploading
+  timeout_in: 4h
+  container:
+    image: arifjenong/rom:nad
+    cpu: 8
+    memory: 32G
+
+  Env_background_script:
+      - ./env.sh
+
+  Download_background_script:
+      #- time rclone copy znxtproject:ccache/$ROM_PROJECT/ccache.tar.gz ~ -P
+      - time rclone copy znxtproject:ccache/$ROM_PROJECT/ccache.tar.zst ~ -P
+      - ./setup.sh
+
+  Out_background_script:
+      - time rclone copy znxtproject:ccache/$ROM_PROJECT/out.tar.zst ~/rom -P
+      - time tar -xaf out.tar.zst
+      - time rm -rf out.tar.zst
+
+  Retry_background_script:
+      - ./retry.sh
+
+  Build_script:
+      - ./repo.sh
+
+  UploadROM_background_script:
+      - cd ~/rom/out/target/product/maple
+      - ls -lh
+      - time rclone copy $(ls *maple*OFFICIAL*.zip) znxtproject:CherishOS/maple -P && time rclone copy $(ls *.md5sum) znxtproject:CherishOS/maple -P && ls -lh
+      #- curl -s https://api.telegram.org/$TG_TOKEN/sendMessage -d chat_id=$TG_CHAT_ID -d text="Build $(cd ~/rom/out/target/product/maple && ls *UNOFFICIAL*.zip) Uploaded Successfully!"
+
+  UploadCc_script:
+      - ./build_zip.sh
+
+  SF_script:
+      - cd ~ && rm -rf rom/out/product
+      #- ./sf.sh

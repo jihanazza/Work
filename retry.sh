@@ -1,0 +1,39 @@
+#!/bin/bash
+
+# Sorting final zip
+compiled_zip() {
+	ZIP=$(find $(pwd)/out/target/product/maple/ -maxdepth 1 -name "*maple*.zip" | perl -e 'print sort { length($b) <=> length($a) } <>' | head -n 1)
+	ZIPNAME=$(basename ${ZIP})
+}
+
+# Retry the ccache fill for 99-100% hit rate
+retry_ccache () {
+    export CCACHE_DIR=~/ccache
+    export CCACHE_EXEC=$(which ccache)
+	hit_rate=$(ccache -s | awk '/hit rate/ {print $4}' | cut -d'.' -f1)
+	if [ $hit_rate -lt 99 ]; then
+		git clone ${TOKEN}/jihanazza/Work -b cherish-12.1 clone && cd clone
+		git commit --allow-empty -m "Retry: Ccache loop $(date -u +"%D %T%p %Z")"
+		git push -q
+	else
+		echo "Ccache is fully configured"
+		git clone ${TOKEN}/jihanazza/Work -b cherish-12.1 clone && cd clone
+		git commit --allow-empty -m "Retry Build $(date -u +"%D %T%p %Z")"
+		git push -q
+	fi
+}
+
+# Trigger retry only if compilation is not finished
+retry_event() {
+	if [ -f $(pwd)/out/target/product/maple/${ZIPNAME} ]; then
+		echo "Successful Build"
+	else
+		retry_ccache
+	fi
+}
+
+cd ~/rom
+sleep 119m
+#sleep 7191
+compiled_zip
+retry_event
