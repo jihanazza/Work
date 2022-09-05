@@ -6,6 +6,8 @@ sync () {
     rclone copy znxtproject:NusantaraProject/manifest/nusantara.xml .repo/manifests/snippets -P
     rclone copy znxtproject:NusantaraProject/manifest/local_nad.xml .repo/local_manifests -P
     repo sync -c --no-clone-bundle --no-tags --optimized-fetch --prune --force-sync -j8
+    rclone copy znxtproject:NusantaraProject/kernel/msm8998.dtsi arch/arm/boot/dts/qcom -P
+    rclone copy znxtproject:NusantaraProject/kernel/msm8998-v2.dtsi arch/arm/boot/dts/qcom -P
 }
 
 build () {
