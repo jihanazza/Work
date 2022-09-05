@@ -8,6 +8,7 @@ sync () {
     repo sync -c --no-clone-bundle --no-tags --optimized-fetch --prune --force-sync -j8
     rclone copy znxtproject:NusantaraProject/kernel/msm8998.dtsi arch/arm/boot/dts/qcom -P
     rclone copy znxtproject:NusantaraProject/kernel/msm8998-v2.dtsi arch/arm/boot/dts/qcom -P
+    rclone copy znxtproject:NusantaraProject/kernel/msm8998-gpu.dtsi arch/arm/boot/dts/qcom -P
 }
 
 build () {
