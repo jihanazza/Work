@@ -57,7 +57,17 @@ get_selinux () {
 
 get_out () {
   cd ~/rom
-  make installclean
+     . build/envsetup.sh
+     export CCACHE_DIR=~/ccache
+     export CCACHE_EXEC=$(which ccache)
+     export USE_CCACHE=1
+     ccache -M 50G
+     ccache -z
+     export BUILD_HOSTNAME=znxt
+     export BUILD_USERNAME=znxt
+     export TZ=Asia/Jakarta
+     lunch nad_maple_dsds-user
+    make installclean
   time com out 9
   time rclone copy out.tar.* znxtproject:ccache/kernel/$ROM_PROJECT -P
   time rm out.tar.*

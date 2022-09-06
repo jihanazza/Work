@@ -6,6 +6,7 @@ sync () {
     rclone copy znxtproject:NusantaraProject/manifest/nusantara.xml .repo/manifests/snippets -P
     rclone copy znxtproject:NusantaraProject/manifest/local_nad.xml .repo/local_manifests -P
     repo sync -c --no-clone-bundle --no-tags --optimized-fetch --prune --force-sync -j8
+    repo sync -c --no-clone-bundle --no-tags --optimized-fetch --prune --force-sync -j8
 }
 
 build () {
@@ -26,9 +27,9 @@ build () {
      export USE_PIXEL_CHARGING=true
      lunch nad_maple_dsds-user
     #make sepolicy -j24
+    make installclean
     make bootimage -j30
     #make systemimage &
-    #make installclean
     #mka nad -j30
 }
 
