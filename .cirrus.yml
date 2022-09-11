@@ -23,7 +23,7 @@ task:
 
   Env_background_script:
       - ./env.sh
-
+ 
   Build_script:
       - cd ~/rom
       - repo init -u https://github.com/minimal-manifest-twrp/platform_manifest_twrp_aosp --depth=1
