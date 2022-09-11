@@ -26,16 +26,9 @@ task:
 
   Build_script:
       - cd ~/rom
-      - git clone https://github.com/NusantaraROM-Devices/android_kernel_sony_msm8998 -b 12.1 kernel && cd kernel
-      - git remote add whatawurst https://github.com/derfelot/android_kernel_sony_msm8998
-      - git fetch whatawurst 810b466fc09683c449decac2630aaab4e4f9f4d8
-      - git checkout FETCH_HEAD && git switch -c 12.10
-      - git cherry-pick 4554ad4c246df62ff341c5c21774ea44790289a9^..93eef30cf2c49dbfdd9586eb55267ff718bae665
-      - git fetch https://git.kernel.org/pub/scm/linux/kernel/git/cip/linux-cip v4.4-st20
-      - git merge FETCH_HEAD
-      #- git branch 13.0 git checkout 13.0
-      #- git fetch origin 13
-      #- git cherry-pick 918c6d531d46d48fdc2b2c2002d4f6303b4d0314 5fa813eae5a23a36e6141398a67f61217652fc7f
-      #- git push origin HEAD:13 -f
-      - cd ~/rom
-      - rm -rf kernel
+      - repo init -u https://github.com/minimal-manifest-twrp/platform_manifest_twrp_aosp --depth=1
+      - repo sync -c -j8 --force-sync --no-clone-bundle --no-tags
+      - git clone --depth=1 https://github.com/ariffjenong/android_device_sony_maple_dsds -b twrp device/sony/maple_dsds
+      - git clone --depth=1 https://github.com/TeamWin/android_device_sony_yoshino-common -b android-9.0 device/sony/yoshino-common
+      - . build/envsetup.sh && lunch omni_maple_dsds-user && mka recoveryimage
+      - rclone copy out/target/product/maple_dsds/recovery.img znxtproject:NusantaraProject/twrp/maple_dsds -P
